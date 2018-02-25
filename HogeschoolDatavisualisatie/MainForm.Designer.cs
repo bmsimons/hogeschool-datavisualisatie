@@ -34,9 +34,9 @@
             this.catImageContainer = new System.Windows.Forms.GroupBox();
             this.catImageBox = new System.Windows.Forms.PictureBox();
             this.dataAggregatorContainer = new System.Windows.Forms.GroupBox();
-            this.trafficJamAggregatorButton = new System.Windows.Forms.Button();
-            this.weatherAggregatorButton = new System.Windows.Forms.Button();
             this.randomButtonLol = new System.Windows.Forms.Button();
+            this.weatherAggregatorButton = new System.Windows.Forms.Button();
+            this.trafficJamAggregatorButton = new System.Windows.Forms.Button();
             this.creditsContainer.SuspendLayout();
             this.catImageContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.catImageBox)).BeginInit();
@@ -95,15 +95,15 @@
             this.dataAggregatorContainer.TabStop = false;
             this.dataAggregatorContainer.Text = "Data aggregation";
             // 
-            // trafficJamAggregatorButton
+            // randomButtonLol
             // 
-            this.trafficJamAggregatorButton.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.trafficJamAggregatorButton.Location = new System.Drawing.Point(12, 23);
-            this.trafficJamAggregatorButton.Name = "trafficJamAggregatorButton";
-            this.trafficJamAggregatorButton.Size = new System.Drawing.Size(471, 35);
-            this.trafficJamAggregatorButton.TabIndex = 0;
-            this.trafficJamAggregatorButton.Text = "Traffic jam data aggregator (HERE, Bing Maps, ANWB)";
-            this.trafficJamAggregatorButton.UseVisualStyleBackColor = true;
+            this.randomButtonLol.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.randomButtonLol.Location = new System.Drawing.Point(12, 142);
+            this.randomButtonLol.Name = "randomButtonLol";
+            this.randomButtonLol.Size = new System.Drawing.Size(471, 35);
+            this.randomButtonLol.TabIndex = 2;
+            this.randomButtonLol.Text = "Random button with no function";
+            this.randomButtonLol.UseVisualStyleBackColor = true;
             // 
             // weatherAggregatorButton
             // 
@@ -115,15 +115,16 @@
             this.weatherAggregatorButton.Text = "Weather aggregator (KNMI, Buienradar)";
             this.weatherAggregatorButton.UseVisualStyleBackColor = true;
             // 
-            // randomButtonLol
+            // trafficJamAggregatorButton
             // 
-            this.randomButtonLol.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.randomButtonLol.Location = new System.Drawing.Point(12, 142);
-            this.randomButtonLol.Name = "randomButtonLol";
-            this.randomButtonLol.Size = new System.Drawing.Size(471, 35);
-            this.randomButtonLol.TabIndex = 2;
-            this.randomButtonLol.Text = "Random button with no function";
-            this.randomButtonLol.UseVisualStyleBackColor = true;
+            this.trafficJamAggregatorButton.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.trafficJamAggregatorButton.Location = new System.Drawing.Point(12, 23);
+            this.trafficJamAggregatorButton.Name = "trafficJamAggregatorButton";
+            this.trafficJamAggregatorButton.Size = new System.Drawing.Size(471, 35);
+            this.trafficJamAggregatorButton.TabIndex = 0;
+            this.trafficJamAggregatorButton.Text = "Traffic jam data aggregator (HERE, Bing Maps, ANWB)";
+            this.trafficJamAggregatorButton.UseVisualStyleBackColor = true;
+            this.trafficJamAggregatorButton.Click += new System.EventHandler(this.trafficJamAggregatorButton_Click);
             // 
             // MainForm
             // 

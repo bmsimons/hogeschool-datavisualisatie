@@ -15,7 +15,7 @@ For this example I'll use D:\mongodbdata
 You will have to start MongoDB from your command line prompt. Start up cmd on your computer and run this command:
 
 ```
-"C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe" --dbname="D:\mongodbdata"
+"C:\Program Files\MongoDB\Server\3.6\bin\mongod.exe" --dbpath="D:\mongodbdata"
 ```
 
 Where D:\mongodbdata is your MongoDB data storage path.
