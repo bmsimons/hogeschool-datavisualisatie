@@ -22,7 +22,7 @@ namespace HogeschoolDatavisualisatie
             this.address = address;
             this.port = port;
             this.client = new MongoClient("mongodb://"+address+":"+port);
-            this.database = this.client.GetDatabase("DataAggregation");
+            this.database = this.client.GetDatabase(database);
         }
 
         private void SetCollection(string collection)
