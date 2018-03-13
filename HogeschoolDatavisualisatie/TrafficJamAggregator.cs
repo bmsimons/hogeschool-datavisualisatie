@@ -19,20 +19,13 @@ namespace HogeschoolDatavisualisatie
         static MongoClient mongoClient;
         static IMongoDatabase mongoDatabase;
         static IMongoCollection<BsonDocument> mongoCollection;
+        static Database database;
 
         public TrafficJamAggregator()
         {
             InitializeComponent();
 
-            Task.Run(() =>
-            {
-                mongoClient = new MongoClient("mongodb://localhost:27017");
-                mongoDatabase = mongoClient.GetDatabase("DataAggregation");
-                mongoCollection = mongoDatabase.GetCollection<BsonDocument>("anwb");
-
-                var docs = Enumerable.Range(0, 10).Select(i => new BsonDocument("x", i));
-                mongoCollection.InsertManyAsync(docs);
-            });
+            database = new Database();
         }
 
         private void TrafficJamAggregator_Load(object sender, EventArgs e)
@@ -49,6 +42,8 @@ namespace HogeschoolDatavisualisatie
 
                 Task AggregateTask = Task.Run(() =>
                 {
+                    database.SetCollection("anwb");
+
                     using (WebClient webClient = new WebClient())
                     {
                         string anwbJsonString = webClient.DownloadString("https://www.anwb.nl/feeds/gethf");
@@ -75,7 +70,7 @@ namespace HogeschoolDatavisualisatie
                                 string jamReason = trafficJam.Reason;
                                 string jamDescription = trafficJam.Description;
 
-                                mongoCollection.InsertOne(new BsonDocument { { "datetime", DateTime }, { "type", "jam" }, { "jamfrom", jamFrom }, { "jamto", jamTo }, { "jamlocation", jamLocation }, { "segmentstart", segmentStart }, { "segmentend", segmentEnd }, { "jamreason", jamReason }, { "jamdescription", jamDescription } });
+                                database.WriteOneToDatabase(new BsonDocument { { "datetime", DateTime }, { "type", "jam" }, { "jamfrom", jamFrom }, { "jamto", jamTo }, { "jamlocation", jamLocation }, { "segmentstart", segmentStart }, { "segmentend", segmentEnd }, { "jamreason", jamReason }, { "jamdescription", jamDescription } });
                             }
 
                             foreach (RoadWork roadWork in iterationObject.Events.RoadWorks)
@@ -91,7 +86,7 @@ namespace HogeschoolDatavisualisatie
                                 string roadWorkReason = roadWork.Reason;
                                 string roadWorkDescription = roadWork.Description;
 
-                                mongoCollection.InsertOne(new BsonDocument { { "datetime", DateTime }, { "type", "roadwork" }, { "roadworkfrom", roadWorkFrom }, { "roadworkto", roadWorkTo }, { "roadworklocation", roadWorkLocation }, { "segmentstart", segmentStart }, { "segmentend", segmentEnd }, { "roadworkreason", roadWorkReason }, { "roadworkdescription", roadWorkDescription } });
+                                database.WriteOneToDatabase(new BsonDocument { { "datetime", DateTime }, { "type", "roadwork" }, { "roadworkfrom", roadWorkFrom }, { "roadworkto", roadWorkTo }, { "roadworklocation", roadWorkLocation }, { "segmentstart", segmentStart }, { "segmentend", segmentEnd }, { "roadworkreason", roadWorkReason }, { "roadworkdescription", roadWorkDescription } });
                             }
                         }
                     }

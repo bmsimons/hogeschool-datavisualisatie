@@ -25,14 +25,19 @@ namespace HogeschoolDatavisualisatie
             this.database = this.client.GetDatabase(database);
         }
 
-        private void SetCollection(string collection)
+        public void SetCollection(string collection)
         {
             this.collection = this.database.GetCollection<BsonDocument>(collection);
         }
 
-        private void WriteToDatabase(IEnumerable<BsonDocument> docs)
+        public void WriteManyToDatabase(IEnumerable<BsonDocument> docs)
         {
             this.collection.InsertMany(docs);
+        }
+
+        public void WriteOneToDatabase(BsonDocument doc)
+        {
+            this.collection.InsertOne(doc);
         }
     }
 }
