@@ -30,10 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TrafficJamAggregator));
             this.anwbContainer = new System.Windows.Forms.GroupBox();
-            this.anwbRestoreDataButton = new System.Windows.Forms.Button();
-            this.anwbExportDataButton = new System.Windows.Forms.Button();
-            this.anwbAggregateButton = new System.Windows.Forms.Button();
             this.anwbStatusBox = new System.Windows.Forms.TextBox();
+            this.anwbAggregateButton = new System.Windows.Forms.Button();
+            this.anwbExportDataButton = new System.Windows.Forms.Button();
+            this.anwbRestoreDataButton = new System.Windows.Forms.Button();
             this.anwbContainer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,23 +50,15 @@
             this.anwbContainer.TabStop = false;
             this.anwbContainer.Text = "ANWB";
             // 
-            // anwbRestoreDataButton
+            // anwbStatusBox
             // 
-            this.anwbRestoreDataButton.Location = new System.Drawing.Point(11, 19);
-            this.anwbRestoreDataButton.Name = "anwbRestoreDataButton";
-            this.anwbRestoreDataButton.Size = new System.Drawing.Size(193, 35);
-            this.anwbRestoreDataButton.TabIndex = 0;
-            this.anwbRestoreDataButton.Text = "Restore data";
-            this.anwbRestoreDataButton.UseVisualStyleBackColor = true;
-            // 
-            // anwbExportDataButton
-            // 
-            this.anwbExportDataButton.Location = new System.Drawing.Point(213, 19);
-            this.anwbExportDataButton.Name = "anwbExportDataButton";
-            this.anwbExportDataButton.Size = new System.Drawing.Size(193, 35);
-            this.anwbExportDataButton.TabIndex = 1;
-            this.anwbExportDataButton.Text = "Export data";
-            this.anwbExportDataButton.UseVisualStyleBackColor = true;
+            this.anwbStatusBox.Location = new System.Drawing.Point(11, 100);
+            this.anwbStatusBox.Multiline = true;
+            this.anwbStatusBox.Name = "anwbStatusBox";
+            this.anwbStatusBox.ReadOnly = true;
+            this.anwbStatusBox.Size = new System.Drawing.Size(395, 85);
+            this.anwbStatusBox.TabIndex = 3;
+            this.anwbStatusBox.Text = "Idle....";
             // 
             // anwbAggregateButton
             // 
@@ -78,15 +70,25 @@
             this.anwbAggregateButton.UseVisualStyleBackColor = true;
             this.anwbAggregateButton.Click += new System.EventHandler(this.anwbAggregateButton_Click);
             // 
-            // anwbStatusBox
+            // anwbExportDataButton
             // 
-            this.anwbStatusBox.Location = new System.Drawing.Point(11, 100);
-            this.anwbStatusBox.Multiline = true;
-            this.anwbStatusBox.Name = "anwbStatusBox";
-            this.anwbStatusBox.ReadOnly = true;
-            this.anwbStatusBox.Size = new System.Drawing.Size(395, 85);
-            this.anwbStatusBox.TabIndex = 3;
-            this.anwbStatusBox.Text = "Idle....";
+            this.anwbExportDataButton.Location = new System.Drawing.Point(213, 19);
+            this.anwbExportDataButton.Name = "anwbExportDataButton";
+            this.anwbExportDataButton.Size = new System.Drawing.Size(193, 35);
+            this.anwbExportDataButton.TabIndex = 1;
+            this.anwbExportDataButton.Text = "Export data";
+            this.anwbExportDataButton.UseVisualStyleBackColor = true;
+            this.anwbExportDataButton.Click += new System.EventHandler(this.anwbExportDataButton_Click);
+            // 
+            // anwbRestoreDataButton
+            // 
+            this.anwbRestoreDataButton.Location = new System.Drawing.Point(11, 19);
+            this.anwbRestoreDataButton.Name = "anwbRestoreDataButton";
+            this.anwbRestoreDataButton.Size = new System.Drawing.Size(193, 35);
+            this.anwbRestoreDataButton.TabIndex = 0;
+            this.anwbRestoreDataButton.Text = "Restore data";
+            this.anwbRestoreDataButton.UseVisualStyleBackColor = true;
+            this.anwbRestoreDataButton.Click += new System.EventHandler(this.anwbRestoreDataButton_Click);
             // 
             // TrafficJamAggregator
             // 

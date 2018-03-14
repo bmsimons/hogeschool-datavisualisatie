@@ -102,5 +102,27 @@ namespace HogeschoolDatavisualisatie
                 anwbAggregateButton.Text = "Start data aggregation";
             }
         }
+
+        private void anwbExportDataButton_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "JSON (*.json)|*.json";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                database.ExportCollection("anwb", saveFileDialog.FileName);
+            }
+        }
+
+        private void anwbRestoreDataButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "JSON (*.json)|*.json";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                database.ImportCollection("anwb", openFileDialog.FileName);
+            }
+        }
     }
 }
