@@ -1,4 +1,4 @@
-﻿namespace Helpers
+﻿namespace HogeschoolDatavisualisatie.Helpers
 {
     public static class StringExtensions
     {
