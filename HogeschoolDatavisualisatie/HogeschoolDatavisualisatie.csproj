@@ -73,8 +73,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataClasses\AnwbObject.cs" />
-    <Compile Include="DataRepository\Database.cs" />
+    <Compile Include="DataModels\AnwbObject.cs" />
+    <Compile Include="DataModels\WeatherModel.cs" />
+    <Compile Include="DataRepository\IDataParser.cs" />
+    <Compile Include="DataRepository\WeatherDataParser.cs" />
+    <Compile Include="Services\Database.cs" />
+    <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Interface\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,7 +127,7 @@
     <Content Include="Interface\database_active.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helpers\" />
+    <Folder Include="Core\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
