@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HogeschoolDatavisualisatie.DataModels
 {
-    public abstract class DataModel
+    interface DataModel
     {
     }
 }
