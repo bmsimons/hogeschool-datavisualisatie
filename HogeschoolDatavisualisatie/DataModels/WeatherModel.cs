@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace HogeschoolDatavisualisatie.DataModels
 {
     [DataContract]
-    class WeatherModel
+    public class WeatherModel : DataModel
     {
         [DataMember]
         public float averageTemperature;

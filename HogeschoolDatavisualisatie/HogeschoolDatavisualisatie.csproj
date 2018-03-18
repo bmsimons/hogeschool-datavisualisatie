@@ -62,6 +62,7 @@
       <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -74,9 +75,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataModels\AnwbObject.cs" />
+    <Compile Include="DataModels\DataModel.cs" />
     <Compile Include="DataModels\WeatherModel.cs" />
+    <Compile Include="DataModels\WeatherModelMonthly.cs" />
     <Compile Include="DataRepository\IDataParser.cs" />
     <Compile Include="DataRepository\WeatherDataParser.cs" />
+    <Compile Include="DataRepository\WeatherDataParserMonth.cs" />
     <Compile Include="Services\Database.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Interface\MainForm.cs">

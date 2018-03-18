@@ -10,12 +10,12 @@ namespace HogeschoolDatavisualisatie.DataRepository
     /// <summary>
     /// Object encapsulating operations to convert KNMI data text file to Weather Models
     /// </summary>
-    class WeatherDataParser : IDataParser<WeatherModel, List<int?>>
+    class WeatherDataParser : IDataParser<WeatherModel, List<int?>, int>
     {
         private string sourceFilePath = null;
         private List<string> textLines = null;
         private List<int?>[] dataPoints = null;
-        public List<int?>[] DataPoints { get { return dataPoints; } }
+        public List<int?>[] DataPoints { get => dataPoints; set => dataPoints = value; }
 
         public WeatherDataParser(string sourceFilePath)
         {
@@ -26,12 +26,12 @@ namespace HogeschoolDatavisualisatie.DataRepository
         public void ParseData()
         {
             textLines = ReadLinesOfDataFile();
-            dataPoints = ConvertStringList(textLines);
+            DataPoints = ConvertStringList(textLines);
         }
 
         public List<int?> GetDataPoint(int index)
         {
-            return dataPoints[index];
+            return DataPoints[index];
         }
 
         public WeatherModel ConvertDataToModel(List<int?> dataPoint)

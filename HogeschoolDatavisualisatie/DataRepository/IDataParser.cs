@@ -11,7 +11,8 @@ namespace HogeschoolDatavisualisatie.DataRepository
     /// </summary>
     /// <typeparam name="T"> The type of model that the parser should create</typeparam>
     /// <typeparam name="T2"> Intermediary data structure to hold model values</typeparam>
-    interface IDataParser<T,T2>
+    /// <typeparam name="T3"> Data type of data points</typeparam>
+    interface IDataParser<T,T2, T3>
     {
         /// <summary>
         /// Generic function name, main entry for a data parser class
@@ -28,6 +29,6 @@ namespace HogeschoolDatavisualisatie.DataRepository
         /// <summary>
         /// Accesor for intermediary array storage
         /// </summary>
-        T2 GetDataPoint(int i);
+        T2 GetDataPoint(T3 i);
     }
 }
