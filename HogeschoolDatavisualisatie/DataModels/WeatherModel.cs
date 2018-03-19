@@ -21,12 +21,16 @@ namespace HogeschoolDatavisualisatie.DataModels
         [JsonProperty("stationName")]
         public string stationName;
 
-        public WeatherModel(float averageTemperature, float lowestTemperature, float highestTemperature, string stationName)
+        [JsonProperty("dateTime")]
+        public DateTime dateTime;
+
+        public WeatherModel(float averageTemperature, float lowestTemperature, float highestTemperature, string stationName, DateTime dateTime)
         {
             this.averageTemperature = averageTemperature;
             this.lowestTemperature = lowestTemperature;
             this.highestTemperature = highestTemperature;
             this.stationName = stationName;
+            this.dateTime = dateTime;
         }
     }
 }

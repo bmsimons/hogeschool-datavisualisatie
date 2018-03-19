@@ -4,6 +4,7 @@ using System.Linq;
 using System.IO;
 using HogeschoolDatavisualisatie.DataModels;
 using HogeschoolDatavisualisatie.Helpers;
+using System.Globalization;
 
 namespace HogeschoolDatavisualisatie.DataRepository
 {
@@ -34,9 +35,29 @@ namespace HogeschoolDatavisualisatie.DataRepository
             return DataPoints[index];
         }
 
+        /// <summary>
+        /// Creates a WeatherModel instance based on intermediary data structure
+        /// </summary>
+        /// <param name="dataPoint"></param>
+        /// <returns></returns>
         public WeatherModel ConvertDataToModel(List<int?> dataPoint)
         {
-            throw new NotImplementedException();
+            if (dataPoint[11] != null && dataPoint[12] != null && dataPoint[14] != null && dataPoint[1] != null)
+            {
+                return new WeatherModel(ConvertDataPointToFloat(dataPoint[11]),
+                    ConvertDataPointToFloat(dataPoint[12]),
+                    ConvertDataPointToFloat(dataPoint[14]),
+                    WeatherStationConverter.Instance.GetWeatherStationName(dataPoint[0].Value),
+                    DateTime.ParseExact(dataPoint[1].ToString(), "yyyyMMdd", CultureInfo.InvariantCulture,
+                          DateTimeStyles.None));
+            }
+            else return null;
+        }
+
+        private float ConvertDataPointToFloat(int? nullableDataPointInt)
+        {
+            int value = nullableDataPointInt.Value;
+            return (float)value / 10;
         }
 
         /// <summary>
