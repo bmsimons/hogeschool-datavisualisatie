@@ -12,7 +12,13 @@ namespace HogeschoolDatavisualisatie.DataModels
         public float averageTemperature;
 
         [JsonProperty("date")]
-        public DateTime date;
+        public DateTime dateTime;
         //Int32 Year, Int32 Month, Int32 Day
+
+        public WeatherModelMonthly(float averageTemperature, DateTime dateTime)
+        {
+            this.averageTemperature = averageTemperature;
+            this.dateTime = dateTime;
+        }
     }
 }
