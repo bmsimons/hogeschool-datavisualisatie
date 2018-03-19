@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Runtime.Serialization;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace HogeschoolDatavisualisatie.DataModels
 {
-    [DataContract]
     public class WeatherModelMonthly
     {
-        [DataMember]
+        [JsonProperty("averageTemperature")]
         public float averageTemperature;
 
-        [DataMember]
+        [JsonProperty("date")]
         public DateTime date;
         //Int32 Year, Int32 Month, Int32 Day
     }

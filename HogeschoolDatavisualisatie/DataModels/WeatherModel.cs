@@ -1,32 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace HogeschoolDatavisualisatie.DataModels
 {
-    [DataContract]
     public class WeatherModel : DataModel
     {
-        [DataMember]
+        [JsonProperty("averageTemperature")]
         public float averageTemperature;
 
-        [DataMember]
+        [JsonProperty("lowestTemperature")]
         public float lowestTemperature;
 
-        [DataMember]
+        [JsonProperty("highestTemperature")]
         public float highestTemperature;
 
-        private int stationNumber;
-
-        [DataMember]
+        [JsonProperty("stationName")]
         public string stationName;
 
-        public WeatherModel(float averageTemperature, float lowestTemperature, float highestTemperature, int stationNumber)
+        public WeatherModel(float averageTemperature, float lowestTemperature, float highestTemperature, string stationName)
         {
             this.averageTemperature = averageTemperature;
             this.lowestTemperature = lowestTemperature;
             this.highestTemperature = highestTemperature;
-            this.stationNumber = stationNumber;
+            this.stationName = stationName;
         }
     }
 }
