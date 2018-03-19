@@ -4,6 +4,9 @@ using Newtonsoft.Json;
 
 namespace HogeschoolDatavisualisatie.DataModels
 {
+    /// <summary>
+    /// KNMI daily weather data class representation
+    /// </summary>
     public class WeatherModel : DataModel
     {
         [JsonProperty("averageTemperature")]

@@ -7,6 +7,9 @@ using System.Globalization;
 
 namespace HogeschoolDatavisualisatie.DataModels
 {
+    /// <summary>
+    /// Class holding month and year as date
+    /// </summary>
     public class MonthYear
     {
         private int year = 0;
