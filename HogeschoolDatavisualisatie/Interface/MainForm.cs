@@ -19,7 +19,7 @@ namespace HogeschoolDatavisualisatie
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            catImageBox.Image = new System.Drawing.Bitmap(new System.IO.MemoryStream(new System.Net.WebClient().DownloadData("http://thecatapi.com/api/images/get?type=gif")));
+           
         }
 
         private void trafficJamAggregatorButton_Click(object sender, EventArgs e)
@@ -29,6 +29,16 @@ namespace HogeschoolDatavisualisatie
                 TrafficJamAggregator trafficJamAggregator = new TrafficJamAggregator();
                 trafficJamAggregator.Show();
             }
+        }
+
+        private void weatherAggregatorButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

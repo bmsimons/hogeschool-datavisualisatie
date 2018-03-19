@@ -74,11 +74,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Aggregator.cs" />
     <Compile Include="DataModels\AnwbObject.cs" />
     <Compile Include="DataModels\DataModel.cs" />
+    <Compile Include="DataModels\MonthYear.cs" />
+    <Compile Include="DataModels\PopulationChangeModel.cs" />
     <Compile Include="DataModels\WeatherModel.cs" />
     <Compile Include="DataModels\WeatherModelMonthly.cs" />
     <Compile Include="DataRepository\IDataParser.cs" />
+    <Compile Include="DataRepository\PopulationChangeParser.cs" />
     <Compile Include="DataRepository\WeatherDataParser.cs" />
     <Compile Include="DataRepository\WeatherDataParserMonth.cs" />
     <Compile Include="DataRepository\WeatherStationConverter.cs" />
@@ -132,8 +136,6 @@
     <Content Include="Data\stations.txt" />
     <Content Include="Interface\database_active.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
