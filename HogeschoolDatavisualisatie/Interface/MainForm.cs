@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using System.Windows.Forms;
+using HogeschoolDatavisualisatie.DataRepository;
+using HogeschoolDatavisualisatie.DataModels;
 
 namespace HogeschoolDatavisualisatie
 {
@@ -18,6 +20,8 @@ namespace HogeschoolDatavisualisatie
         static IMongoDatabase mongoDatabase;
         static IMongoCollection<BsonDocument> mongoCollection;
         static Database database;
+
+        TrafficParser trafficParser = new TrafficParser();
 
         public MainForm()
         {
@@ -40,16 +44,6 @@ namespace HogeschoolDatavisualisatie
             }
         }
 
-        private void weatherAggregatorButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         private void exportButton_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -69,6 +63,77 @@ namespace HogeschoolDatavisualisatie
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 database.ImportCollection("anwb", openFileDialog.FileName);
+            }
+        }
+
+        private void AggregationButton_Click(object sender, EventArgs e)
+        {
+            if (selectDatasetBox.SelectedIndex != -1)
+            {
+                switch (selectDatasetBox.Items[selectDatasetBox.SelectedIndex].ToString())
+                {
+                    case "Traffic":
+                        OpenFileDialog openFileDialog = new OpenFileDialog();
+                        openFileDialog.Filter = "CSV (*.csv)|*.csv";
+
+                        if (openFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            trafficParser.ParseData(openFileDialog.FileName);
+
+                            database.SetCollection("rijkswaterstaat");
+
+                            foreach (TrafficModel trafficResultItem in trafficParser.ListTraffic)
+                            {
+                                database.WriteOneToDatabase(new BsonDocument
+                                {
+                                    {"datum",        trafficResultItem.Datum ?? ""},
+                                    {"jaar",         trafficResultItem.Jaar ?? ""},
+                                    {"mnd",          trafficResultItem.Mnd ?? ""},
+                                    {"dag",          trafficResultItem.Dag ?? ""},
+                                    {"ticvanri",     trafficResultItem.Ticvanri ?? ""},
+                                    {"ticvan",       trafficResultItem.Ticvan ?? ""},
+                                    {"richt",        trafficResultItem.Richt ?? ""},
+                                    {"hm",           trafficResultItem.Hm ?? ""},
+                                    {"oorz",         trafficResultItem.Oorz ?? ""},
+                                    {"begt",         trafficResultItem.Begt ?? ""},
+                                    {"stuur",        trafficResultItem.StUur ?? ""},
+                                    {"stmin",        trafficResultItem.StMin ?? ""},
+                                    {"eindt",        trafficResultItem.Eindt ?? ""},
+                                    {"einduur",      trafficResultItem.EindUur ?? ""},
+                                    {"eindmin",      trafficResultItem.EindMin ?? ""},
+                                    {"zwaarte",      trafficResultItem.Zwaarte ?? ""},
+                                    {"gemleng",      trafficResultItem.GemLeng ?? ""},
+                                    {"duur",         trafficResultItem.Duur ?? ""},
+                                    {"dagnr",        trafficResultItem.Dagnr ?? ""},
+                                    {"weeknr",       trafficResultItem.Weeknr ?? ""},
+                                    {"dagsoort",     trafficResultItem.Dagsoort ?? ""},
+                                    {"g_l",          trafficResultItem.G_L ?? ""},
+                                    {"provincie",    trafficResultItem.Provinci ?? ""},
+                                    {"routelet",     trafficResultItem.Routelet ?? ""},
+                                    {"routenum",     trafficResultItem.Routenum ?? ""},
+                                    {"routeoms",     trafficResultItem.Routeoms ?? ""},
+                                    {"naam_van",     trafficResultItem.Naam_Van ?? ""},
+                                    {"naam_naa",     trafficResultItem.Naam_Naa ?? ""},
+                                    {"hm_van",       trafficResultItem.Hm_Van ?? ""},
+                                    {"hm_naar",      trafficResultItem.Hm_Naar ?? ""},
+                                    {"traj_van",     trafficResultItem.Traj_Van ?? ""},
+                                    {"traj_naa",     trafficResultItem.Traj_Naa ?? ""},
+                                    {"flricht",      trafficResultItem.Flricht ?? ""},
+                                    {"filesagvwerk", trafficResultItem.FilesAgvWerk ?? ""},
+                                    {"idwerk",       trafficResultItem.IdWerk ?? ""}
+                                });
+                            }
+                        }
+
+                        break;
+                    default:
+                        MessageBox.Show("This option is not supported/implemented at the moment!");
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("You forgot to make a selection in the dropdown menu.");
             }
         }
     }

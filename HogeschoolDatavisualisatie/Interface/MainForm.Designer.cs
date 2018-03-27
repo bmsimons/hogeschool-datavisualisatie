@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.ControlContainer = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.selectDatasetBox = new System.Windows.Forms.ComboBox();
             this.AggregationButton = new System.Windows.Forms.Button();
             this.exportButton = new System.Windows.Forms.Button();
             this.ImportButton = new System.Windows.Forms.Button();
@@ -41,7 +41,7 @@
             // 
             // ControlContainer
             // 
-            this.ControlContainer.Controls.Add(this.comboBox1);
+            this.ControlContainer.Controls.Add(this.selectDatasetBox);
             this.ControlContainer.Controls.Add(this.AggregationButton);
             this.ControlContainer.Controls.Add(this.exportButton);
             this.ControlContainer.Controls.Add(this.ImportButton);
@@ -52,21 +52,20 @@
             this.ControlContainer.TabStop = false;
             this.ControlContainer.Text = "Controls";
             // 
-            // comboBox1
+            // selectDatasetBox
             // 
-            this.comboBox1.AllowDrop = true;
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.selectDatasetBox.AllowDrop = true;
+            this.selectDatasetBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.selectDatasetBox.FormattingEnabled = true;
+            this.selectDatasetBox.Items.AddRange(new object[] {
             "Traffic",
             "Weather",
             "WeatherMonth",
             "PopulationChange"});
-            this.comboBox1.Location = new System.Drawing.Point(11, 127);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(394, 21);
-            this.comboBox1.TabIndex = 3;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.selectDatasetBox.Location = new System.Drawing.Point(11, 127);
+            this.selectDatasetBox.Name = "selectDatasetBox";
+            this.selectDatasetBox.Size = new System.Drawing.Size(394, 21);
+            this.selectDatasetBox.TabIndex = 3;
             // 
             // AggregationButton
             // 
@@ -76,6 +75,7 @@
             this.AggregationButton.TabIndex = 2;
             this.AggregationButton.Text = "Start data aggregation";
             this.AggregationButton.UseVisualStyleBackColor = true;
+            this.AggregationButton.Click += new System.EventHandler(this.AggregationButton_Click);
             // 
             // exportButton
             // 
@@ -148,7 +148,7 @@
         private System.Windows.Forms.Button ImportButton;
         private System.Windows.Forms.TextBox anwbStatusBox;
         private System.Windows.Forms.Label LogLabel;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox selectDatasetBox;
     }
 }
 

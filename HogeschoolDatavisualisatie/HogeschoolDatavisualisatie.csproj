@@ -38,6 +38,9 @@
     <ApplicationIcon>Interface\database_active.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsvHelper, Version=7.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.7.1.0\lib\net45\CsvHelper.dll</HintPath>
+    </Reference>
     <Reference Include="DnsClient, Version=1.0.7.0, Culture=neutral, PublicKeyToken=4574bb5573c51424, processorArchitecture=MSIL">
       <HintPath>..\packages\DnsClient.1.0.7\lib\net45\DnsClient.dll</HintPath>
     </Reference>
@@ -78,10 +81,12 @@
     <Compile Include="DataModels\DataModel.cs" />
     <Compile Include="DataModels\MonthYear.cs" />
     <Compile Include="DataModels\PopulationChangeModel.cs" />
+    <Compile Include="DataModels\TrafficModel.cs" />
     <Compile Include="DataModels\WeatherModel.cs" />
     <Compile Include="DataModels\WeatherModelMonthly.cs" />
     <Compile Include="DataRepository\IDataParser.cs" />
     <Compile Include="DataRepository\PopulationChangeParser.cs" />
+    <Compile Include="DataRepository\TrafficParser.cs" />
     <Compile Include="DataRepository\WeatherDataParser.cs" />
     <Compile Include="DataRepository\WeatherDataParserMonth.cs" />
     <Compile Include="DataRepository\WeatherStationConverter.cs" />
