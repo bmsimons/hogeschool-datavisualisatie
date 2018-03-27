@@ -41,7 +41,7 @@ For our project we need to do the following:
 
 ## Project Members
 - [Bart Simons](https://github.com/bmsimons)
-- Vincent du Mez
+- [Vincent du Mez](https://github.com/vindmc)
 - [Tim van Keulen](https://github.com/TimvanKeulen)
 - [Jasper Hetterscheid](https://github.com/jasperh97)
 - [Maikel Veen](https://github.com/MaikelVeen)
