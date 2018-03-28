@@ -18,38 +18,29 @@ namespace HogeschoolDatavisualisatie
 {
     public partial class MainForm : Form
     {
-        TrafficParser trafficParser = new TrafficParser();
-
         public MainForm()
         {
             InitializeComponent();
-
-            //database = new Database();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
+        private void MainForm_Load(object sender, EventArgs e) { }
 
-        }
-
-        private void trafficJamAggregatorButton_Click(object sender, EventArgs e)
-        {
-            if (Application.OpenForms.OfType<TrafficJamAggregator>().Count() == 0)
-            {
-                TrafficJamAggregator trafficJamAggregator = new TrafficJamAggregator();
-                trafficJamAggregator.Show();
-            }
-        }
-
+        /// <summary>
+        /// Handle Export Button Click: call jsonexporter given correct prevariants
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ExportButton_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "JSON (*.json)|*.json";
-
             bool boxItemSelected = (selectDatasetBox.SelectedIndex != -1);
-            if (saveFileDialog.ShowDialog() == DialogResult.OK && boxItemSelected)
+            if (boxItemSelected)
             {
-                JsonExporter.ExportMongoCollection(GetSelectedBoxAsCollectionName(), saveFileDialog.FileName);
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "JSON (*.json)|*.json";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    JsonExporter.ExportMongoCollection(GetSelectedBoxAsCollectionName(), saveFileDialog.FileName);
+                }
             }
             else
             {
@@ -57,15 +48,22 @@ namespace HogeschoolDatavisualisatie
             }
         }
 
+        /// <summary>
+        /// Handle Import Button Click: call jsonimporter given correct prevariants
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImportButton_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "JSON (*.json)|*.json";
-
             bool boxItemSelected = (selectDatasetBox.SelectedIndex != -1);
-            if (openFileDialog.ShowDialog() == DialogResult.OK && boxItemSelected)
+            if (boxItemSelected)
             {
-                JsonImporter.ImportMongoCollection(GetSelectedBoxAsCollectionName(), openFileDialog.FileName);
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "JSON (*.json)|*.json";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    JsonImporter.ImportMongoCollection(GetSelectedBoxAsCollectionName(), openFileDialog.FileName);
+                }
             }
             else
             {
@@ -101,61 +99,10 @@ namespace HogeschoolDatavisualisatie
 
                 switch (selectDatasetBox.Items[selectDatasetBox.SelectedIndex].ToString())
                 {
-                    /*case "Traffic":
-                        {
-                            openFileDialog.Filter = "CSV (*.csv)|*.csv";
-
-                            if (openFileDialog.ShowDialog() == DialogResult.OK)
-                            {
-                                trafficParser.ParseData(openFileDialog.FileName);
-
-                                database.SetCollection("rijkswaterstaat");
-
-                                foreach (TrafficModel trafficResultItem in trafficParser.ListTraffic)
-                                {
-                                    database.WriteOneToDatabase(new BsonDocument
-                                {
-                                    {"datum",        trafficResultItem.Datum ?? ""},
-                                    {"jaar",         trafficResultItem.Jaar ?? ""},
-                                    {"mnd",          trafficResultItem.Mnd ?? ""},
-                                    {"dag",          trafficResultItem.Dag ?? ""},
-                                    {"ticvanri",     trafficResultItem.Ticvanri ?? ""},
-                                    {"ticvan",       trafficResultItem.Ticvan ?? ""},
-                                    {"richt",        trafficResultItem.Richt ?? ""},
-                                    {"hm",           trafficResultItem.Hm ?? ""},
-                                    {"oorz",         trafficResultItem.Oorz ?? ""},
-                                    {"begt",         trafficResultItem.Begt ?? ""},
-                                    {"stuur",        trafficResultItem.StUur ?? ""},
-                                    {"stmin",        trafficResultItem.StMin ?? ""},
-                                    {"eindt",        trafficResultItem.Eindt ?? ""},
-                                    {"einduur",      trafficResultItem.EindUur ?? ""},
-                                    {"eindmin",      trafficResultItem.EindMin ?? ""},
-                                    {"zwaarte",      trafficResultItem.Zwaarte ?? ""},
-                                    {"gemleng",      trafficResultItem.GemLeng ?? ""},
-                                    {"duur",         trafficResultItem.Duur ?? ""},
-                                    {"dagnr",        trafficResultItem.Dagnr ?? ""},
-                                    {"weeknr",       trafficResultItem.Weeknr ?? ""},
-                                    {"dagsoort",     trafficResultItem.Dagsoort ?? ""},
-                                    {"g_l",          trafficResultItem.G_L ?? ""},
-                                    {"provincie",    trafficResultItem.Provinci ?? ""},
-                                    {"routelet",     trafficResultItem.Routelet ?? ""},
-                                    {"routenum",     trafficResultItem.Routenum ?? ""},
-                                    {"routeoms",     trafficResultItem.Routeoms ?? ""},
-                                    {"naam_van",     trafficResultItem.Naam_Van ?? ""},
-                                    {"naam_naa",     trafficResultItem.Naam_Naa ?? ""},
-                                    {"hm_van",       trafficResultItem.Hm_Van ?? ""},
-                                    {"hm_naar",      trafficResultItem.Hm_Naar ?? ""},
-                                    {"traj_van",     trafficResultItem.Traj_Van ?? ""},
-                                    {"traj_naa",     trafficResultItem.Traj_Naa ?? ""},
-                                    {"flricht",      trafficResultItem.Flricht ?? ""},
-                                    {"filesagvwerk", trafficResultItem.FilesAgvWerk ?? ""},
-                                    {"idwerk",       trafficResultItem.IdWerk ?? ""}
-                                });
-                                }
-                            }
-
+                    case "Traffic":
+                        { 
                             break;
-                        }*/
+                        }
                     case "Weather":
                         {
                             openFileDialog.Filter = "Text files (*.txt)|*.txt";
@@ -173,6 +120,10 @@ namespace HogeschoolDatavisualisatie
                             {
                                 Aggregator.AggregateWeatherModelMonthly(openFileDialog.FileName);
                             }
+                            break;
+                        }
+                    case "Population":
+                        {
                             break;
                         }
 
