@@ -7,20 +7,20 @@ namespace HogeschoolDatavisualisatie.DataModels
     /// </summary>
     class PopulationChangeModel : DataModel
     {
-        [JsonProperty("bornAlive")]
-        public int bornAlive = 0;
+        [JsonProperty("Levendgeborenen_2")]
+        public string bornAlive = null;
 
-        [JsonProperty("totalDeaths")]
-        public int totalDeaths = 0;
+        [JsonProperty("Overledenen_3")]
+        public string totalDeaths = null;
 
-        [JsonProperty("monthYear")]
-        public MonthYear monthYear;
+        [JsonProperty("Perioden")]
+        public string monthYear;
 
-        public PopulationChangeModel(int bornAlive, int totalDeaths, MonthYear monthYear)
-        {
-            this.bornAlive = bornAlive;
-            this.totalDeaths = totalDeaths;
-            this.monthYear = monthYear;
-        }
+        [JsonProperty("ID")]
+        public string id;
+
+        [JsonProperty("RegioS")]
+        public string regios;
+
     }
 }
