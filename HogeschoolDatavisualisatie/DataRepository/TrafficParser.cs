@@ -22,6 +22,7 @@ namespace HogeschoolDatavisualisatie.DataRepository
                 CsvReader csv = new CsvReader(reader);
                 csv.Configuration.Delimiter = ";";
                 csv.Configuration.MissingFieldFound = null;
+                csv.Configuration.HeaderValidated = null;
                 while (csv.Read())
                 {
                     TrafficModel Record = csv.GetRecord<TrafficModel>();

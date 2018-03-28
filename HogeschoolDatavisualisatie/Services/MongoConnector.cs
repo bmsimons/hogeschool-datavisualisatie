@@ -28,7 +28,10 @@ namespace HogeschoolDatavisualisatie.Services
         {
             this.ipAddress = ipAddress;
             this.port = port;
+        }
 
+        public void Connect()
+        {
             this.mongoClient = new MongoClient("mongodb://" + ipAddress + ":" + port);
             this.mongoDatabase = this.mongoClient.GetDatabase(DatabaseName);
         }
@@ -49,6 +52,7 @@ namespace HogeschoolDatavisualisatie.Services
         }
 
         public IMongoDatabase MongoDatabase { get => mongoDatabase; set => mongoDatabase = value; }
+        public MongoClient MongoClient { get => mongoClient; set => mongoClient = value; }
 
         public void InsertIntoDatabse(List<BsonDocument> documents, string collectionName)
         {

@@ -34,8 +34,9 @@
             this.AggregationButton = new System.Windows.Forms.Button();
             this.exportButton = new System.Windows.Forms.Button();
             this.ImportButton = new System.Windows.Forms.Button();
-            this.anwbStatusBox = new System.Windows.Forms.TextBox();
             this.LogLabel = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.ConnectionButton = new System.Windows.Forms.Button();
             this.ControlContainer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,17 +98,6 @@
             this.ImportButton.UseVisualStyleBackColor = true;
             this.ImportButton.Click += new System.EventHandler(this.ImportButton_Click);
             // 
-            // anwbStatusBox
-            // 
-            this.anwbStatusBox.BackColor = System.Drawing.SystemColors.Control;
-            this.anwbStatusBox.Location = new System.Drawing.Point(429, 36);
-            this.anwbStatusBox.Multiline = true;
-            this.anwbStatusBox.Name = "anwbStatusBox";
-            this.anwbStatusBox.ReadOnly = true;
-            this.anwbStatusBox.Size = new System.Drawing.Size(555, 647);
-            this.anwbStatusBox.TabIndex = 7;
-            this.anwbStatusBox.Text = "Idle....";
-            // 
             // LogLabel
             // 
             this.LogLabel.AutoSize = true;
@@ -117,14 +107,35 @@
             this.LogLabel.TabIndex = 8;
             this.LogLabel.Text = "Log";
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Items.AddRange(new object[] {
+            "Idle"});
+            this.listBox1.Location = new System.Drawing.Point(429, 36);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(555, 641);
+            this.listBox1.TabIndex = 9;
+            // 
+            // ConnectionButton
+            // 
+            this.ConnectionButton.Location = new System.Drawing.Point(12, 654);
+            this.ConnectionButton.Name = "ConnectionButton";
+            this.ConnectionButton.Size = new System.Drawing.Size(167, 23);
+            this.ConnectionButton.TabIndex = 10;
+            this.ConnectionButton.Text = "Make Database Connection";
+            this.ConnectionButton.UseVisualStyleBackColor = true;
+            this.ConnectionButton.Click += new System.EventHandler(this.ConnectionButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(996, 695);
+            this.Controls.Add(this.ConnectionButton);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.LogLabel);
-            this.Controls.Add(this.anwbStatusBox);
             this.Controls.Add(this.ControlContainer);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -146,9 +157,10 @@
         private System.Windows.Forms.Button AggregationButton;
         private System.Windows.Forms.Button exportButton;
         private System.Windows.Forms.Button ImportButton;
-        private System.Windows.Forms.TextBox anwbStatusBox;
         private System.Windows.Forms.Label LogLabel;
         private System.Windows.Forms.ComboBox selectDatasetBox;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button ConnectionButton;
     }
 }
 

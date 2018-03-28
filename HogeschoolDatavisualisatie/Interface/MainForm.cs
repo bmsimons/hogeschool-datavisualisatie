@@ -23,7 +23,27 @@ namespace HogeschoolDatavisualisatie
             InitializeComponent();
         }
 
-        private void MainForm_Load(object sender, EventArgs e) { }
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            MakeConnection();
+        }
+
+        private void MakeConnection()
+        {
+            try
+            {
+                MongoConnector.Instance.Connect();
+                if (MongoConnector.Instance.MongoClient.Cluster.Description.State == MongoDB.Driver.Core.Clusters.ClusterState.Disconnected)
+                {
+                    throw new Exception("Could not connect to database");
+                }
+                listBox1.Items.Add("Succesfully connected to Mongo Database");
+            }
+            catch (Exception exception)
+            {
+                listBox1.Items.Add(exception.Message);
+            }
+        }
 
         /// <summary>
         /// Handle Export Button Click: call jsonexporter given correct prevariants
@@ -100,7 +120,13 @@ namespace HogeschoolDatavisualisatie
                 switch (selectDatasetBox.Items[selectDatasetBox.SelectedIndex].ToString())
                 {
                     case "Traffic":
-                        { 
+                        {
+                            openFileDialog.Filter = "CSV (*.csv)|*.csv";
+
+                            if (openFileDialog.ShowDialog() == DialogResult.OK)
+                            {
+                                Aggregator.AggregateTrafficModel(openFileDialog.FileName);
+                            }
                             break;
                         }
                     case "Weather":
@@ -135,6 +161,18 @@ namespace HogeschoolDatavisualisatie
             else
             {
                 MessageBox.Show("You forgot to make a selection in the dropdown menu.");
+            }
+        }
+
+        private void ConnectionButton_Click(object sender, EventArgs e)
+        {
+            if(MongoConnector.Instance.MongoClient.Cluster.Description.State == MongoDB.Driver.Core.Clusters.ClusterState.Connected)
+            {
+                listBox1.Items.Add("Already connected to database");
+            }
+            else
+            {
+                MakeConnection();
             }
         }
     }

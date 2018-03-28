@@ -80,7 +80,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Aggregator.cs" />
-    <Compile Include="DataModels\AnwbObject.cs" />
     <Compile Include="DataModels\DataModel.cs" />
     <Compile Include="DataModels\MonthYear.cs" />
     <Compile Include="DataModels\PopulationChangeModel.cs" />
@@ -93,7 +92,6 @@
     <Compile Include="DataRepository\WeatherDataParser.cs" />
     <Compile Include="DataRepository\WeatherDataParserMonth.cs" />
     <Compile Include="DataRepository\WeatherStationConverter.cs" />
-    <Compile Include="Services\Database.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Interface\MainForm.cs">
       <SubType>Form</SubType>
@@ -103,12 +101,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Interface\TrafficJamAggregator.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Interface\TrafficJamAggregator.Designer.cs">
-      <DependentUpon>TrafficJamAggregator.cs</DependentUpon>
-    </Compile>
     <Compile Include="Services\JsonExporter.cs" />
     <Compile Include="Services\JsonImporter.cs" />
     <Compile Include="Services\MongoConnector.cs" />
@@ -125,9 +117,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Interface\TrafficJamAggregator.resx">
-      <DependentUpon>TrafficJamAggregator.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
