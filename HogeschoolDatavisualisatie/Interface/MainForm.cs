@@ -11,6 +11,7 @@ using MongoDB.Bson;
 using System.Windows.Forms;
 using HogeschoolDatavisualisatie.DataRepository;
 using HogeschoolDatavisualisatie.DataModels;
+using HogeschoolDatavisualisatie.Core;
 
 namespace HogeschoolDatavisualisatie
 {
@@ -27,12 +28,12 @@ namespace HogeschoolDatavisualisatie
         {
             InitializeComponent();
 
-            database = new Database();
+            //database = new Database();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-           
+
         }
 
         private void trafficJamAggregatorButton_Click(object sender, EventArgs e)
@@ -66,25 +67,32 @@ namespace HogeschoolDatavisualisatie
             }
         }
 
+        /// <summary>
+        /// Handle button click and start aggregation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AggregationButton_Click(object sender, EventArgs e)
         {
             if (selectDatasetBox.SelectedIndex != -1)
             {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+
                 switch (selectDatasetBox.Items[selectDatasetBox.SelectedIndex].ToString())
                 {
                     case "Traffic":
-                        OpenFileDialog openFileDialog = new OpenFileDialog();
-                        openFileDialog.Filter = "CSV (*.csv)|*.csv";
-
-                        if (openFileDialog.ShowDialog() == DialogResult.OK)
                         {
-                            trafficParser.ParseData(openFileDialog.FileName);
+                            openFileDialog.Filter = "CSV (*.csv)|*.csv";
 
-                            database.SetCollection("rijkswaterstaat");
-
-                            foreach (TrafficModel trafficResultItem in trafficParser.ListTraffic)
+                            if (openFileDialog.ShowDialog() == DialogResult.OK)
                             {
-                                database.WriteOneToDatabase(new BsonDocument
+                                trafficParser.ParseData(openFileDialog.FileName);
+
+                                database.SetCollection("rijkswaterstaat");
+
+                                foreach (TrafficModel trafficResultItem in trafficParser.ListTraffic)
+                                {
+                                    database.WriteOneToDatabase(new BsonDocument
                                 {
                                     {"datum",        trafficResultItem.Datum ?? ""},
                                     {"jaar",         trafficResultItem.Jaar ?? ""},
@@ -122,10 +130,31 @@ namespace HogeschoolDatavisualisatie
                                     {"filesagvwerk", trafficResultItem.FilesAgvWerk ?? ""},
                                     {"idwerk",       trafficResultItem.IdWerk ?? ""}
                                 });
+                                }
                             }
+
+                            break;
+                        }
+                    case "Weather":
+                        {
+                            openFileDialog.Filter = "Text files (*.txt)|*.txt";
+                            if (openFileDialog.ShowDialog() == DialogResult.OK)
+                            {
+                                Aggregator.AggregateWeatherModel(openFileDialog.FileName);
+                            }
+                            break;
                         }
 
-                        break;
+                    case "WeatherMonth":
+                        {
+                            openFileDialog.Filter = "Text files (*.txt)|*.txt";
+                            if (openFileDialog.ShowDialog() == DialogResult.OK)
+                            {
+                                Aggregator.AggregateWeatherModelMonthly(openFileDialog.FileName);
+                            }
+                            break;
+                        }
+
                     default:
                         MessageBox.Show("This option is not supported/implemented at the moment!");
                         break;

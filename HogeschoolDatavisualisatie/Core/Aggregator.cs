@@ -20,9 +20,9 @@ namespace HogeschoolDatavisualisatie.Core
         /// <summary>
         /// Data Aggregation Sequence of WeatherModel
         /// </summary>
-        public static void AggregateWeatherModel()
+        public static void AggregateWeatherModel(string filePath)
         {
-            WeatherDataParser weatherDataParser = new WeatherDataParser(@"C:\Users\Maikel\Documents\GitHub\hogeschool-datavisualisatie\HogeschoolDatavisualisatie\Data\KNMI_20180319.txt");
+            WeatherDataParser weatherDataParser = new WeatherDataParser(filePath);
             List<WeatherModel> weatherModels = new List<WeatherModel>();
             foreach (List<int?> dataPoint in weatherDataParser.DataPoints)
             {
@@ -36,9 +36,9 @@ namespace HogeschoolDatavisualisatie.Core
         /// <summary>
         /// Data Aggregation Sequence of Monthly WeatherModel
         /// </summary>
-        public static void AggregateWeatherModelMonthly()
+        public static void AggregateWeatherModelMonthly(string filePath)
         {
-            WeatherDataParserMonth weatherDataParserMonth = new WeatherDataParserMonth(@"C:\Users\Maikel\Documents\GitHub\hogeschool-datavisualisatie\HogeschoolDatavisualisatie\Data\tg_hom_mnd260.txt");
+            WeatherDataParserMonth weatherDataParserMonth = new WeatherDataParserMonth(filePath);
             List<WeatherModelMonthly> weatherModelMonthlies = new List<WeatherModelMonthly>();
             foreach (Tuple<float, DateTime> dataPoint in weatherDataParserMonth.DataPoints)
             {

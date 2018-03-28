@@ -48,7 +48,7 @@ namespace HogeschoolDatavisualisatie.DataRepository
             Dictionary<int, string> weatherStations = new Dictionary<int, string>();
 
             //TODO - Make use of an alternative way
-            using (StreamReader streamReader = new StreamReader(@"C:\Users\Maikel\Documents\GitHub\hogeschool-datavisualisatie\HogeschoolDatavisualisatie\Data\stations.txt"))
+            using (StreamReader streamReader = new StreamReader(@"C:\Users\Maikel\Source\Repos\hogeschool-datavisualisatie\HogeschoolDatavisualisatie\Data\stations.txt"))
             {
                 string nextLine = "";
                 while ((nextLine = streamReader.ReadLine()) != null)
