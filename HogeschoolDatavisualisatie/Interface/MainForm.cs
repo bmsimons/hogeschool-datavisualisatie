@@ -12,16 +12,12 @@ using System.Windows.Forms;
 using HogeschoolDatavisualisatie.DataRepository;
 using HogeschoolDatavisualisatie.DataModels;
 using HogeschoolDatavisualisatie.Core;
+using HogeschoolDatavisualisatie.Services;
 
 namespace HogeschoolDatavisualisatie
 {
     public partial class MainForm : Form
     {
-        static MongoClient mongoClient;
-        static IMongoDatabase mongoDatabase;
-        static IMongoCollection<BsonDocument> mongoCollection;
-        static Database database;
-
         TrafficParser trafficParser = new TrafficParser();
 
         public MainForm()
@@ -45,25 +41,52 @@ namespace HogeschoolDatavisualisatie
             }
         }
 
-        private void exportButton_Click(object sender, EventArgs e)
+        private void ExportButton_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            /*SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "JSON (*.json)|*.json";
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 database.ExportCollection("anwb", saveFileDialog.FileName);
+            }*/
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "JSON (*.json)|*.json";
+
+            bool boxItemSelected = (selectDatasetBox.SelectedIndex != -1);
+            if (saveFileDialog.ShowDialog() == DialogResult.OK && boxItemSelected)
+            {
+                JsonExporter.ExportMongoCollection(GetSelectedBoxAsCollectionName(), saveFileDialog.FileName);
+            }
+            else
+            {
+                MessageBox.Show("Please make a selection in the drop down menu");
             }
         }
 
         private void ImportButton_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+           /* OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "JSON (*.json)|*.json";
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 database.ImportCollection("anwb", openFileDialog.FileName);
+            }*/
+        }
+
+        private string GetSelectedBoxAsCollectionName()
+        {
+            switch (selectDatasetBox.Items[selectDatasetBox.SelectedIndex].ToString())
+            {
+                case "Traffic":
+                    return "rijkswaterstaat";
+                case "Weather":
+                    return "weather-day";
+                case "WeatherMonth":
+                    return "weather-month";
+                default:
+                    return null;
             }
         }
 
@@ -80,7 +103,7 @@ namespace HogeschoolDatavisualisatie
 
                 switch (selectDatasetBox.Items[selectDatasetBox.SelectedIndex].ToString())
                 {
-                    case "Traffic":
+                    /*case "Traffic":
                         {
                             openFileDialog.Filter = "CSV (*.csv)|*.csv";
 
@@ -134,7 +157,7 @@ namespace HogeschoolDatavisualisatie
                             }
 
                             break;
-                        }
+                        }*/
                     case "Weather":
                         {
                             openFileDialog.Filter = "Text files (*.txt)|*.txt";

@@ -109,6 +109,7 @@
     <Compile Include="Interface\TrafficJamAggregator.Designer.cs">
       <DependentUpon>TrafficJamAggregator.cs</DependentUpon>
     </Compile>
+    <Compile Include="Services\JsonExporter.cs" />
     <Compile Include="Services\MongoConnector.cs" />
     <EmbeddedResource Include="Interface\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

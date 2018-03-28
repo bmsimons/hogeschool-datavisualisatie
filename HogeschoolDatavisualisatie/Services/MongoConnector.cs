@@ -48,6 +48,8 @@ namespace HogeschoolDatavisualisatie.Services
             }
         }
 
+        public IMongoDatabase MongoDatabase { get => mongoDatabase; set => mongoDatabase = value; }
+
         public void InsertIntoDatabse(List<BsonDocument> documents, string collectionName)
         {
             IMongoCollection<BsonDocument> collection = this.mongoDatabase.GetCollection<BsonDocument>(collectionName);
