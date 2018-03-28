@@ -56,7 +56,7 @@ namespace HogeschoolDatavisualisatie.Core
 
             foreach (TrafficModel trafficResultItem in trafficParser.ListTraffic)
             {
-                MongoConnector.Instance.InsertIntoDatabse(new BsonDocument {
+                MongoConnector.Instance.InsertIntoDatabase(new BsonDocument {
                                     {"datum",        trafficResultItem.Datum ?? ""},
                                     {"jaar",         trafficResultItem.Jaar ?? ""},
                                     {"mnd",          trafficResultItem.Mnd ?? ""},
@@ -101,7 +101,7 @@ namespace HogeschoolDatavisualisatie.Core
         {
             foreach (T model in modelList)
             {
-                MongoConnector.Instance.InsertIntoDatabse(ConvertModelToBsonDocument<T>(model), collection);
+                MongoConnector.Instance.InsertIntoDatabase(ConvertModelToBsonDocument<T>(model), collection);
             }
         }
 

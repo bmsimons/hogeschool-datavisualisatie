@@ -33,10 +33,6 @@ namespace HogeschoolDatavisualisatie
             try
             {
                 MongoConnector.Instance.Connect();
-                if (MongoConnector.Instance.MongoClient.Cluster.Description.State == MongoDB.Driver.Core.Clusters.ClusterState.Disconnected)
-                {
-                    throw new Exception("Could not connect to database");
-                }
                 listBox1.Items.Add("Succesfully connected to Mongo Database");
             }
             catch (Exception exception)
@@ -101,6 +97,8 @@ namespace HogeschoolDatavisualisatie
                     return "weather-day";
                 case "WeatherMonth":
                     return "weather-month";
+                case "PopulationChange":
+                    return "population";
                 default:
                     return null;
             }
@@ -148,8 +146,15 @@ namespace HogeschoolDatavisualisatie
                             }
                             break;
                         }
-                    case "Population":
+                    case "PopulationChange":
                         {
+                            openFileDialog.Filter = "JSOn (*.json)|*.json";
+                            if (openFileDialog.ShowDialog() == DialogResult.OK)
+                            {
+                                PopulationChangeParser parser = new PopulationChangeParser(openFileDialog.FileName);
+                                parser.ParseData();
+                            }
+                            
                             break;
                         }
 

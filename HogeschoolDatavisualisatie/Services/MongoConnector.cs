@@ -54,13 +54,13 @@ namespace HogeschoolDatavisualisatie.Services
         public IMongoDatabase MongoDatabase { get => mongoDatabase; set => mongoDatabase = value; }
         public MongoClient MongoClient { get => mongoClient; set => mongoClient = value; }
 
-        public void InsertIntoDatabse(List<BsonDocument> documents, string collectionName)
+        public void InsertIntoDatabase(List<BsonDocument> documents, string collectionName)
         {
             IMongoCollection<BsonDocument> collection = this.mongoDatabase.GetCollection<BsonDocument>(collectionName);
             collection.InsertMany(documents);
         }
 
-        public void InsertIntoDatabse(BsonDocument document, string collectionName)
+        public void InsertIntoDatabase(BsonDocument document, string collectionName)
         {
             IMongoCollection<BsonDocument> collection = this.mongoDatabase.GetCollection<BsonDocument>(collectionName);
             collection.InsertOne(document);

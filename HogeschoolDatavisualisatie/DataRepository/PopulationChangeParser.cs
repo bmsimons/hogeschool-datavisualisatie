@@ -43,7 +43,7 @@ namespace HogeschoolDatavisualisatie.DataRepository
                 PopulationChangeModel model = item.First.ToObject<PopulationChangeModel>();
                 string json_inner = JsonConvert.SerializeObject(model);
                 BsonDocument document = BsonDocument.Parse(json_inner);
-                MongoConnector.Instance.InsertIntoDatabse(document, "population-change");
+                MongoConnector.Instance.InsertIntoDatabase(document, "population-change");
             }
             
         }

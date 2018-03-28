@@ -28,7 +28,7 @@ namespace HogeschoolDatavisualisatie.Services
 
             foreach (JObject jsonObject in jsonContainer)
             {
-                MongoConnector.Instance.InsertIntoDatabse(BsonDocument.Parse(jsonObject.ToString()), collectionName);
+                MongoConnector.Instance.InsertIntoDatabase(BsonDocument.Parse(jsonObject.ToString()), collectionName);
             }
         }
     }

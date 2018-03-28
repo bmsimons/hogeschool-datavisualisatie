@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace HogeschoolDatavisualisatie.DataModels
 {
@@ -14,13 +15,6 @@ namespace HogeschoolDatavisualisatie.DataModels
         public string totalDeaths = null;
 
         [JsonProperty("Perioden")]
-        public string monthYear;
-
-        [JsonProperty("ID")]
-        public string id;
-
-        [JsonProperty("RegioS")]
-        public string regios;
-
+        public DateTime date;
     }
 }
