@@ -43,13 +43,6 @@ namespace HogeschoolDatavisualisatie
 
         private void ExportButton_Click(object sender, EventArgs e)
         {
-            /*SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "JSON (*.json)|*.json";
-
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                database.ExportCollection("anwb", saveFileDialog.FileName);
-            }*/
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "JSON (*.json)|*.json";
 
@@ -66,13 +59,18 @@ namespace HogeschoolDatavisualisatie
 
         private void ImportButton_Click(object sender, EventArgs e)
         {
-           /* OpenFileDialog openFileDialog = new OpenFileDialog();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "JSON (*.json)|*.json";
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            bool boxItemSelected = (selectDatasetBox.SelectedIndex != -1);
+            if (openFileDialog.ShowDialog() == DialogResult.OK && boxItemSelected)
             {
-                database.ImportCollection("anwb", openFileDialog.FileName);
-            }*/
+                JsonImporter.ImportMongoCollection(GetSelectedBoxAsCollectionName(), openFileDialog.FileName);
+            }
+            else
+            {
+                MessageBox.Show("Please make a selection in the drop down menu");
+            }
         }
 
         private string GetSelectedBoxAsCollectionName()
