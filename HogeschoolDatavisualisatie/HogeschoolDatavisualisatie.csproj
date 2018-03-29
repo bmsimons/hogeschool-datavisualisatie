@@ -80,9 +80,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Aggregator.cs" />
-    <Compile Include="DataModels\DataModel.cs" />
     <Compile Include="DataModels\MonthYear.cs" />
     <Compile Include="DataModels\PopulationChangeModel.cs" />
+    <Compile Include="DataModels\TrafficDataModel.cs" />
     <Compile Include="DataModels\TrafficModel.cs" />
     <Compile Include="DataModels\WeatherModel.cs" />
     <Compile Include="DataModels\WeatherModelMonthly.cs" />

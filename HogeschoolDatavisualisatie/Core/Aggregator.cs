@@ -52,10 +52,11 @@ namespace HogeschoolDatavisualisatie.Core
 
         public static void AggregateTrafficModel(string filePath)
         {
-            TrafficParser trafficParser = new TrafficParser();
-            trafficParser.ParseData(filePath);
+            TrafficParser trafficParser = new TrafficParser(filePath);
+            AddToDatabase<TrafficDataModel>(trafficParser.RealTrafficModel, "traffic");
+            /*trafficParser.ParseCSV(filePath);
 
-            foreach (TrafficModel trafficResultItem in trafficParser.ListTraffic)
+            foreach (TrafficModel trafficResultItem in trafficParser.trafficModelList)
             {
                 MongoConnector.Instance.InsertIntoDatabase(new BsonDocument {
                                     {"datum",        trafficResultItem.Datum ?? ""},
@@ -95,7 +96,7 @@ namespace HogeschoolDatavisualisatie.Core
                                     {"idwerk",       trafficResultItem.IdWerk ?? ""}
                                 }, "rijkswaterstaat");
 
-            }
+            }*/
         }
 
         public static void AddToDatabase<T>(List<T> modelList, string collection)
