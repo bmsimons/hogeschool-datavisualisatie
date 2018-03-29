@@ -1,51 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using HogeschoolDatavisualisatie.DataModels;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using HogeschoolDatavisualisatie.Core;
-using MongoDB.Bson;
-using HogeschoolDatavisualisatie.Services;
+using HogeschoolDatavisualisatie.Helpers;
+using System.Globalization;
+using CsvHelper;
+using System.Text.RegularExpressions;
 
 namespace HogeschoolDatavisualisatie.DataRepository
 {
-    class PopulationChangeParser : IDataParser<PopulationChangeModel, Tuple<int, int, MonthYear>, object>
+    class PopulationChangeParser 
     {
-        private string sourceFilePath = null;
+        private List<Population> inter = new List<Population>();
+        private List<PopulationChangeModel> data = new List<PopulationChangeModel>();
 
         public PopulationChangeParser(string sourceFilePath)
         {
-            this.sourceFilePath = sourceFilePath;
+            inter = ParseData(sourceFilePath);
+            ParseList(inter);
         }
 
-        public PopulationChangeModel ConvertDataToModel(Tuple<int, int, MonthYear> data)
-        {
-            throw new NotImplementedException();
-        }
+        internal List<PopulationChangeModel> Data { get => data; set => data = value; }
 
-        public Tuple<int, int, MonthYear> GetDataPoint(object i)
+        private List<Population> ParseData(String absoluteCsvPath)
         {
-            throw new NotImplementedException();
-        }
-
-        public void ParseData()
-        {
-            string json = File.ReadAllText(sourceFilePath);
-            JToken outer = JToken.Parse(json);
-            List<BsonDocument> allItems = new List<BsonDocument>();
-            var test = outer.Children();
-            foreach(var item in test)
+            List<Population> list = new List<Population>();
+            using (TextReader reader = File.OpenText(absoluteCsvPath))
             {
-                PopulationChangeModel model = item.First.ToObject<PopulationChangeModel>();
-                string json_inner = JsonConvert.SerializeObject(model);
-                BsonDocument document = BsonDocument.Parse(json_inner);
-                MongoConnector.Instance.InsertIntoDatabase(document, "population-change");
+                CsvReader csv = new CsvReader(reader);
+                csv.Configuration.Delimiter = ";";
+                csv.Configuration.MissingFieldFound = null;
+                csv.Configuration.HeaderValidated = null;
+                while (csv.Read())
+                {
+                    Population Record = csv.GetRecord<Population>();
+                    list.Add(Record);
+                }
             }
-            
+            return list;
         }
+
+        private void ParseList(List<Population> pop)
+        {
+            foreach(Population model in pop)
+            {
+                if(Regex.Matches(model.Perioden, @"[JK]").Count > 0)
+                {
+                    continue;
+                }
+                string date = Regex.Replace(model.Perioden, "[^0-9.]", "");
+                date += "01";
+                DateTime realDate = DateTime.ParseExact(date, "yyyyMMdd", CultureInfo.InvariantCulture,
+                         DateTimeStyles.None);
+
+                int death = Int32.Parse(model.Overledenen_2);
+                int born = Int32.Parse(model.Levendgeborenen_1);
+
+                PopulationChangeModel dataPoint = new PopulationChangeModel(born, death, realDate);
+                data.Add(dataPoint);
+            }
+        }
+
     }
 }

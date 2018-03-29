@@ -92,7 +92,7 @@ namespace HogeschoolDatavisualisatie
             switch (selectDatasetBox.Items[selectDatasetBox.SelectedIndex].ToString())
             {
                 case "Traffic":
-                    return "rijkswaterstaat";
+                    return "traffic";
                 case "Weather":
                     return "weather-day";
                 case "WeatherMonth":
@@ -148,11 +148,10 @@ namespace HogeschoolDatavisualisatie
                         }
                     case "PopulationChange":
                         {
-                            openFileDialog.Filter = "JSOn (*.json)|*.json";
+                            openFileDialog.Filter = "CSV (*.csv)|*.csv";
                             if (openFileDialog.ShowDialog() == DialogResult.OK)
                             {
-                                PopulationChangeParser parser = new PopulationChangeParser(openFileDialog.FileName);
-                                parser.ParseData();
+                                Aggregator.AggregatePopulation(openFileDialog.FileName);
                             }
                             
                             break;

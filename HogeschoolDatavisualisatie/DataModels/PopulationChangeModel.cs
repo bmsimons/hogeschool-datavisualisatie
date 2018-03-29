@@ -1,6 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
-
+﻿using System;
+using MongoDB.Bson.Serialization.Attributes;
 namespace HogeschoolDatavisualisatie.DataModels
 {
     /// <summary>
@@ -8,13 +7,21 @@ namespace HogeschoolDatavisualisatie.DataModels
     /// </summary>
     class PopulationChangeModel
     {
-        [JsonProperty("Levendgeborenen_2")]
-        public string bornAlive = null;
+        [BsonElement("bornAlive")]
+        public int bornAlive = 0;
 
-        [JsonProperty("Overledenen_3")]
-        public string totalDeaths = null;
+        [BsonElement("totalDeaths")]
+        public int totalDeaths = 0;
 
-        [JsonProperty("Perioden")]
-        public DateTime date;
+        [BsonDateTimeOptions(DateOnly = true)]
+        public DateTime dateTime;
+
+        [BsonConstructor]
+        public PopulationChangeModel(int bornAlive, int totalDeaths, DateTime dateTime)
+        {
+            this.bornAlive = bornAlive;
+            this.totalDeaths = totalDeaths;
+            this.dateTime = dateTime;
+        }
     }
 }

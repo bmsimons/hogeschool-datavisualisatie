@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="Core\Aggregator.cs" />
     <Compile Include="DataModels\MonthYear.cs" />
+    <Compile Include="DataModels\Population.cs" />
     <Compile Include="DataModels\PopulationChangeModel.cs" />
     <Compile Include="DataModels\TrafficDataModel.cs" />
     <Compile Include="DataModels\TrafficModel.cs" />
