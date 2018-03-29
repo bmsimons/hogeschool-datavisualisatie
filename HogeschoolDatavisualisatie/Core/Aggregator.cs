@@ -9,6 +9,7 @@ using HogeschoolDatavisualisatie.Services;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using Newtonsoft.Json;
+using MongoDB.Bson.Serialization;
 
 namespace HogeschoolDatavisualisatie.Core
 {
@@ -99,10 +100,17 @@ namespace HogeschoolDatavisualisatie.Core
 
         public static void AddToDatabase<T>(List<T> modelList, string collection)
         {
+            BsonClassMap classMap = BsonClassMap.RegisterClassMap<T>(cm =>
+            {
+                cm.AutoMap();
+            });
+
             foreach (T model in modelList)
             {
-                MongoConnector.Instance.InsertIntoDatabase(ConvertModelToBsonDocument<T>(model), collection);
+                var document = model.ToBsonDocument();
+                MongoConnector.Instance.InsertIntoDatabase(document, collection); ;
             }
+
         }
 
         public static BsonDocument ConvertModelToBsonDocument<T>(T model)
