@@ -6,7 +6,7 @@ namespace HogeschoolDatavisualisatie.DataModels
     /// <summary>
     /// Data model representing data from CBS statline
     /// </summary>
-    class PopulationChangeModel : DataModel
+    class PopulationChangeModel
     {
         [JsonProperty("Levendgeborenen_2")]
         public string bornAlive = null;

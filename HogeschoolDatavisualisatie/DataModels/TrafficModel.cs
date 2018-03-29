@@ -5,7 +5,7 @@ namespace HogeschoolDatavisualisatie.DataModels
     /// <summary>
     /// Class representation of traffic incident data and traffic jam data from Rijskwaterstaat
     /// </summary>
-    public class TrafficModel : DataModel
+    public class TrafficModel 
     {
         public String Datum        { get; set; }
         public String Jaar         { get; set; }
