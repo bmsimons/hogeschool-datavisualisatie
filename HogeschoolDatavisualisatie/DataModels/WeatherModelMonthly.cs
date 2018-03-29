@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace HogeschoolDatavisualisatie.DataModels
 {
@@ -8,13 +9,13 @@ namespace HogeschoolDatavisualisatie.DataModels
     /// </summary>
     public class WeatherModelMonthly
     {
-        [JsonProperty("averageTemperature")]
+        [BsonElement("averageTemperature")]
         public float averageTemperature;
 
-        [JsonProperty("date")]
+        [BsonDateTimeOptions(DateOnly = true)]
         public DateTime dateTime;
-        //Int32 Year, Int32 Month, Int32 Day
 
+        [BsonConstructor]
         public WeatherModelMonthly(float averageTemperature, DateTime dateTime)
         {
             this.averageTemperature = averageTemperature;

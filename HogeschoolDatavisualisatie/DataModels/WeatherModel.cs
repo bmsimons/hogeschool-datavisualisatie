@@ -1,29 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace HogeschoolDatavisualisatie.DataModels
 {
     /// <summary>
     /// KNMI daily weather data class representation
     /// </summary>
-    public class WeatherModel : DataModel
+    public class WeatherModel
     {
-        [JsonProperty("averageTemperature")]
-        public float averageTemperature;
+        [BsonElement("averageTemperature")]
+        public float averageTemperature { get; set; }
 
-        [JsonProperty("lowestTemperature")]
-        public float lowestTemperature;
+        [BsonElement("lowestTemperature")]
+        public float lowestTemperature { get; set; }
 
-        [JsonProperty("highestTemperature")]
-        public float highestTemperature;
+        [BsonElement("highestTemperature")]
+        public float highestTemperature { get; set; }
 
-        [JsonProperty("stationName")]
-        public string stationName;
+        [BsonElement("stationName")]
+        public string stationName { get; set; }
 
-        [JsonProperty("dateTime")]
+        [BsonDateTimeOptions(DateOnly = true)]
         public DateTime dateTime;
 
+        [BsonConstructor]
         public WeatherModel(float averageTemperature, float lowestTemperature, float highestTemperature, string stationName, DateTime dateTime)
         {
             this.averageTemperature = averageTemperature;
